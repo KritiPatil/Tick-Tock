@@ -1,61 +1,53 @@
-const Engine = Matter.Engine;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Constraint = Matter.Constraint;
-
-var engine, world;
-
 function setup() {
-  ellispeMode(CENTER);
-  createCanvas(800,400);
-  engine = Engine.create();
-  world = engine.world;
+  ellipseMode(CENTER);
+  createCanvas(600,600);
+
+  angleMode(DEGREES);
+
+}
+
+function draw() {
+  background("black");
 
   let hr = hour();
   let mn = minute();
   let sc = second();
 
-  angleMode(DEGREES);
+  scAngle = map(sc, 0, 60, 0, 360);
+  mnAngle = map(mn, 0, 60, 0, 360);
+  hrAngle = map(hr, 0, 12, 0, 360);
 
   console.log(hr);
   console.log(mn);
   console.log(sc);
 
-  scAngle = map(sc, 0, 60, 0, 360);
-  mnAngle = map(mn, 0, 60, 0, 360);
-  hrAngle = map(hr, 0, 12, 0, 360);
-
-  /*push ();
-  rotate(scAngle);
-  stroke(255, 0, 0);
-  strokeWeight(7);
-  line(0, 0, 100, 0);
-  pop();*/
-}
-
-function draw() {
-  background("black");
-  Engine.update(engine);
+  translate(width, height);
   
+  //seconds
   push ();
   rotate(scAngle);
+  translate(p5.Vector.fromAngle(millis() / 60000, 40));
   stroke(255, 20, 147);
   strokeWeight(7);
-  line(400, 400, 391, 10);
+  line(300, 300, 50, 200);
   pop(); 
   
+  //minutes
   push ();
   rotate(mnAngle);
+  translate(p5.Vector.fromAngle(millis() / 60000, 40));
   stroke(0, 206, 209);
   strokeWeight(7);
-  line(400, 200, 395, 10);
+  line(300, 300, 50, 200);
   pop(); 
 
+  //hours
   push ();
   rotate(hrAngle);
+  translate(p5.Vector.fromAngle(millis() / 60000, 40));
   stroke(148, 0, 211);
   strokeWeight(7);
-  line(400, 200, 393, 100);
+  line(300, 300, 200, 200);
   pop(); 
 
   drawSprites();
